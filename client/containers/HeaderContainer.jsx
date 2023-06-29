@@ -1,37 +1,35 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-const HeaderContainer = (props) => {
+// HeaderContainer is the component that holds our main title, new task entry and submission, and the clear all button
+const HeaderContainer = () => {
   // init vars task and priority in taskCreator closure. These will be updated as the user enters data into the newTask and Priority fields
   let task;
   let priority;
   // The taskCreator function sends a POST request to the server to add a new task to the database
   const taskCreator = (e) => {
-    // prevent auto-reload on form submission
-    // e.preventDefault();
     fetch('/tasks', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ task: task, priority: priority }), // body data type must match "Content-Type" header
-      // params: { body: task },
-      // mode: 'no-cors',
+      // the POST request passes in the task and priority level from user input for our backend to create the corresponding database entry
+      body: JSON.stringify({ task: task, priority: priority }),
     })
       .then((response) => response.json())
       .then((data) => console.log('successfully posted new Task:', data))
       .catch((err) => console.log('Error at taskCreator in App.jsx:', err));
-    return; // parses JSON response into native JavaScript objects
+    return;
   };
   // clearConfirm alerts the user that they are about to reset the database and requests confirmation
-  const clearConfirm = (e) => {
+  const clearConfirm = () => {
     alert('Warning! Doing this will clear all of your tasks.');
     if (confirm('Are you sure you want to proceed?')) {
+      // if the user confirms, invoke clearDB
       clearDB();
     }
   };
-  // clearDB resets the entire database through a PUT request to our server, which routs it to our db
-  const clearDB = (e) => {
+  // init function clearDB, a function that resets the entire database through a PUT request to our backend
+  const clearDB = () => {
     fetch('/tasks', {
       method: 'PUT',
     })
@@ -45,7 +43,11 @@ const HeaderContainer = (props) => {
         <a href='https://asana.com/resources/eisenhower-matrix' target='_blank'>
           Eisenhower
         </a>
-        : Giving you the power to{' '}
+        : Giving you the{' '}
+        <a href='https://youtu.be/W_pbnMIhunE?t=38' target='_blank'>
+          power{' '}
+        </a>
+        to{' '}
         <a href='https://youtu.be/dQw4w9WgXcQ' target='_blank'>
           get more done.
         </a>

@@ -73,7 +73,7 @@ taskController.deleteTasks = (req, res, next) => {
   Task.findOneAndDelete({ _id: req.body.id })
     .then((t) => {
       console.log(t);
-      res.locals.output;
+      res.locals.output = t.task;
       return next();
     })
     .catch((err) => {

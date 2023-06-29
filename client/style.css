@@ -5,6 +5,19 @@
   justify-content: center; */
 }
 
+body {
+  background-image: url('./backgroundEisenhower2.jpeg');
+  max-height: 100%;
+  max-width: 100%;
+}
+
+footer {
+}
+
+#app {
+  /* background-color: aquamarine; */
+}
+
 input {
   border-radius: 5px;
 }
@@ -43,8 +56,9 @@ input {
   width: 600px;
   height: 250px;
   background-color: rgb(68, 172, 207);
+  opacity: 0.97;
   padding: 5px;
-  border: 1px solid white;
+  border: 1px solid black;
   flex-grow: 1;
   flex-shrink: 1;
 }
