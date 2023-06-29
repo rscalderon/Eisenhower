@@ -1,0 +1,25 @@
+Eisenhower Matrix to-do App
+
+1. Identify your user(s)
+   Busy professionals, managers, and knowledge workers
+2. What is the problem you’re solving?
+   Being effective in a world full of distractions, conflicting priorities, and overflowing inboxes. Getting the most important things in the day done.
+3. What is the solution?
+   A task management software based on the Eisenhower Matrix that allows users to prioritize their most important and urgent tasks first, and complete the rest of their tasks as needed
+4. What is the MVP scope? (core features you must get working)
+   A to-do list with CRUD functionality. In order of criticality:
+   Add new tasks to to-do list
+   Delete tasks from to-do list
+5. What are the tough technical challenges involved with solving this problem?
+   Setting up:
+   A working server, including routing and controller logic that queries database and returns data to frontend
+   Working database
+   Working frontend (HTML, Webpack, styling/CSS + SASS)
+   In addition:
+   Ensuring entire app works together
+
+6. What are the stretch goals?
+   Arrange on front-end matrix in correct box
+   Visually pleasing front-end
+   Ability to update tasks without having to add and delete
+   Add pomodoro functionality
