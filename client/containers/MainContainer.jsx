@@ -40,10 +40,11 @@ const MainContainer = (props) => {
             className='quadrant'
             message={messageArr[i]}
             tasks={tasks}
+            setter={updateQuadrants}
           ></Quadrant>
         );
-        updateQuadrants([...quadrantsArr]);
       }
+      updateQuadrants([...quadrantsArr]);
     };
     fetchTasks();
   }, []);

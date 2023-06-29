@@ -40,10 +40,14 @@ taskController.postTasks = (req, res, next) => {
 taskController.patchTasks = (req, res, next) => {
   console.log('req.body is: ', req.body);
   // insert controller logic here
-  Task.findOneAndUpdate({ _id: req.body.id }, { task: req.body.task })
+  Task.findOneAndUpdate(
+    { _id: req.body.id },
+    { task: req.body.task },
+    { new: true }
+  )
     .then((t) => {
       console.log(t);
-      res.locals.output;
+      res.locals.output = t.task;
       return next();
     })
     .catch((err) => {
@@ -60,9 +64,9 @@ taskController.resetTasks = (req, res, next) => {
       return next();
     })
     .catch((err) => {
-      next(err);
+      console.log('Error in taskController.resetTasks', err);
+      return next(err);
     });
-  // Task.dropDatabase()
 };
 
 taskController.deleteTasks = (req, res, next) => {

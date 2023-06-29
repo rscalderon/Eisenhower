@@ -2,10 +2,10 @@ import React, { Component, useState, useEffect } from 'react';
 
 const TaskRow = (props) => {
   const task = props.id.task;
-  const [state, setter] = useState([...task]);
-  // console.log(props.id._id);
+  const [taskState, taskSetter] = useState(task);
+
   // The taskCreator function sends a request to the server to add a new task to the database
-  const taskDelete = (e) => {
+  const taskDelete = () => {
     fetch('/tasks', {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
@@ -14,7 +14,7 @@ const TaskRow = (props) => {
       .then((response) => response.json())
       .then((data) => console.log('successfully posted new Task:', data))
       .catch((err) => console.log('Error at taskCreator in App.jsx:', err));
-    return; // parses JSON response into native JavaScript objects
+    return;
   };
   const updateConfirm = (e) => {
     const updatedTask = prompt(
@@ -38,7 +38,7 @@ const TaskRow = (props) => {
       .then((response) => response.json())
       .then((data) => {
         console.log('successfully posted new Task:', data);
-        setter[data];
+        return taskSetter(data);
       })
       .catch((err) => console.log('Error at taskCreator in App.jsx:', err));
     return;
@@ -46,7 +46,7 @@ const TaskRow = (props) => {
   return (
     <div>
       <li>
-        {task} <button onClick={taskDelete}>x</button>
+        {taskState} <button onClick={taskDelete}>x</button>
         <button onClick={updateConfirm}>update</button>
       </li>
     </div>
