@@ -16,17 +16,14 @@ mongoose.connection.once('open', () => {
   console.log('Connected to Database');
 });
 
-/**
- * handle parsing request body
- */
+// parse incoming JSON
 app.use(express.json());
 
-// app.use(express.static(path.resolve(__dirname, '../client')));
+app.use(express.static(path.resolve(__dirname, '../build')));
 
 app.use('/tasks', taskRouter);
 
-// *        *       *
-// catch-all route handler for any requests to an unknown route
+// catch-all route handler
 app.use((req, res) =>
   res.status(404).send("This is not the page you're looking for...")
 );
@@ -37,14 +34,11 @@ app.use((err, req, res, next) => {
     status: 500,
     message: { err: 'An error occurred' },
   };
-  const errorObj = Object.assign({}, defaultErr, err);
-  console.log(errorObj.log);
+  const errorObj = Object.assign(defaultErr, err);
+  console.error(errorObj.log);
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-/**
- * start server
- */
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}...`);
 });
