@@ -9,7 +9,7 @@ const Quadrant = (props) => {
   // if tasksArr is not undefined/null, iterate through tasksArr and push a new TaskRow component with id and key properties
   if (tasksArr) {
     tasksArr.forEach((task) => {
-      taskComponents.push(<TaskRow id={task} key={task._id}></TaskRow>);
+      taskComponents.push(<TaskRow id={task} key={task._id} />);
     });
   }
   return (

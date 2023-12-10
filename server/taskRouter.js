@@ -6,7 +6,6 @@ const taskController = require('./taskController');
 const router = express.Router();
 
 router.get('/', taskController.getTasks, (req, res) => {
-  // console.log('sending getTasks response');
   return res.status(200).json(res.locals.output);
 });
 

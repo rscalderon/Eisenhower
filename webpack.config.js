@@ -7,11 +7,9 @@ module.exports = {
   // specify current mode to NODE_ENV var defined in package.json
   // This variable assignment allows us to switch between development and production modes
   mode: process.env.NODE_ENV,
-  // where we want our bundle to run
   entry: './client/index.js',
   plugins: [
     new HtmlWebpackPlugin({
-      // letsgooooo it was this right?
       title: 'Development',
       template: './client/index.html',
     }),
@@ -42,10 +40,6 @@ module.exports = {
         loader: 'babel-loader',
         options: {
           presets: ['@babel/env', '@babel/react'],
-          // plugins: [
-          // '@babel/plugin-transform-runtime',
-          // '@babel/transform-async-to-generator',
-          // ]
         },
       },
       // rule for loading SCSS

@@ -5,6 +5,7 @@ const TaskRow = (props) => {
   // init constant variables task as passed-in task prop from MainContainer get request to database, taskState as state (task) and taskSetter as setter
   const task = props.id.task;
   const [taskState, taskSetter] = useState(task);
+  // throw new Error('err');
   // The taskDelete function sends a request to the server to delete the current task from the database
   const taskDelete = () => {
     // invoke Fetch API method with DELETE request

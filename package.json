@@ -4,6 +4,8 @@
   "description": "A task management software based on the Eisenhower Matrix that allows users to prioritize their most important and urgent tasks first, and complete the rest of their tasks as needed",
   "main": "server/server.js",
   "scripts": {
+    "start": "node server/server.js",
+    "build": "webpack build",
     "dev": "NODE_ENV=development nodemon server/server.js & NODE_ENV=development webpack serve",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,6 +22,7 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^6.14.0",
     "sass-loader": "^12.3.0",
+    "shieldql": "^1.0.1",
     "webpack": "^5.57.1"
   },
   "devDependencies": {

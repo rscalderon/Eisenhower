@@ -8,6 +8,5 @@ const taskSchema = new Schema({
   // priority: { type: String, required: true },
 });
 
-// You must export your model through module.exports
-// The collection name should be 'student'
+// Export task module
 module.exports = mongoose.model('task', taskSchema);
