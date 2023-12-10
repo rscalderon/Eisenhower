@@ -1,7 +1,7 @@
 {
   "name": "eisenhower",
   "version": "1.0.0",
-  "description": "A task management software based on the Eisenhower Matrix that allows users to prioritize their most important and urgent tasks first, and complete the rest of their tasks as needed",
+  "description": "Task management app to make you the most productive you can be. Based on the Eisenhower Matrix",
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",
