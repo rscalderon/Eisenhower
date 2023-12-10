@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MainContainer from './containers/MainContainer.jsx';
 import HeaderContainer from './containers/HeaderContainer.jsx';
 
 const App = () => {
+  const [resetCount, updateResetCount] = useState(0);
   return (
     <div>
-      <HeaderContainer />
-      <MainContainer />
+      <HeaderContainer setter={updateResetCount} resetCount={resetCount} />
+      <MainContainer resetCount={resetCount} />
     </div>
   );
 };

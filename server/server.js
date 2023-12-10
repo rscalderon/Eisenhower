@@ -1,4 +1,5 @@
 // import path and express functionality
+const path = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
 
@@ -8,10 +9,12 @@ const app = express();
 const taskRouter = require('./taskRouter');
 const PORT = 3000;
 
-mongoose.connect(
-  'mongodb+srv://samourcalderon:Lhc7kzLqKHuJ7cv2@cluster0.pmha4cj.mongodb.net/',
-  { useNewUrlParser: true, useUnifiedTopology: true }
-);
+mongoose
+  .connect(
+    'mongodb+srv://samourcalderon:Lhc7kzLqKHuJ7cv2@cluster0.pmha4cj.mongodb.net/',
+    { useNewUrlParser: true, useUnifiedTopology: true }
+  )
+  .catch((err) => console.error(err));
 mongoose.connection.once('open', () => {
   console.log('Connected to Database');
 });
@@ -20,6 +23,10 @@ mongoose.connection.once('open', () => {
 app.use(express.json());
 
 app.use(express.static(path.resolve(__dirname, '../build')));
+
+app.get('/home', (req, res) =>
+  res.status(200).send(path.resolve('../client/landingpage.html'))
+);
 
 app.use('/tasks', taskRouter);
 

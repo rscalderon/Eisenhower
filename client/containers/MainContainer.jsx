@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Quadrant from '../components/Quadrant.jsx';
 
 // Fetch tasks from database and build four Quadrant components
-const MainContainer = () => {
+const MainContainer = ({ resetCount }) => {
   // define array of quadrants as state
   const [allQuadrants, updateQuadrants] = useState([]);
   // fetch tasks and update state to array with 4 quadrant components
@@ -13,17 +13,18 @@ const MainContainer = () => {
       'Urgent, not Important',
       'Not Urgent, not Important',
     ];
-    // Nested array that stores the tasks of each quadrant
+    // Nested array that stores tasks of each quadrant
     const allTasks = [];
     // Fetch tasks from database and build array with 4 quadrant components
     const fetchTasks = async () => {
-      // temporary store of quadrant components before updating state
+      // Temporarily store quadrant components before updating state
       const quadrantsArr = [];
       for (let i = 0; i < quadrantHeaders.length; i++) {
         try {
           // store each quadrant's tasks retrieved from database and push to allTasks array
-          const tasks = await fetch(`/tasks?priority=${i}`).json();
-          allTasks.push(tasks);
+          await fetch(`/tasks?priority=${i}`)
+            .then((data) => data.json())
+            .then((tasks) => allTasks.push(tasks));
         } catch (err) {
           console.error('Error at taskCreator in App.jsx:', err);
         }
@@ -34,7 +35,7 @@ const MainContainer = () => {
             key={`Q${i + 1}`}
             className='quadrant'
             message={quadrantHeaders[i]}
-            tasks={tasks}
+            tasks={allTasks[i]}
             setter={updateQuadrants}
           ></Quadrant>
         );
@@ -43,10 +44,10 @@ const MainContainer = () => {
       }
     };
     fetchTasks();
-  }, []);
+  }, [resetCount]);
   return (
     <main id='AppContainer'>
-      {allQuadrants ? allQuadrants : 'Loading...'.repeat(4)}
+      {allQuadrants ? allQuadrants : 'Loading...'}
     </main>
   );
 };

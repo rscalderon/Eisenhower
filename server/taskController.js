@@ -7,37 +7,41 @@ taskController.getTasks = (req, res, next) => {
   const { priority } = req.query;
   // pull all tasks that match priority
   Task.find({ priority })
-    .then((t) => {
-      res.locals.output = t;
+    .then((tasks) => {
+      res.locals.tasks = tasks;
       return next();
     })
     // if there is an error, invoke global error handler in server.js
     .catch((err) => {
-      console.log('Error in taskController.getTasks', err);
-      return next(err);
+      return next({
+        log: `Error at taskController.getTasks: ${err}`,
+        status: 500,
+        message: 'Error while fetching tasks',
+      });
     });
-  // newTask.save().then();
 };
 
 taskController.postTasks = (req, res, next) => {
-  // Extract task and priority props from request body
+  // Extract task and priority
   const { task, priority } = req.body;
   // init new task instance
   const newTask = new Task({ task, priority });
   newTask
     .save()
-    .then((t) => {
-      res.locals.output = t;
+    .then((newTask) => {
+      res.locals.newTask = newTask;
       return next();
     })
     .catch((err) => {
-      console.log('Error in taskController.postTasks', err);
-      return next(err);
+      return next({
+        log: `Error in taskController.postTasks, ${err}`,
+        status: 500,
+        message: 'Error while creating task',
+      });
     });
 };
 
 taskController.patchTasks = (req, res, next) => {
-  console.log('req.body is: ', req.body);
   // insert controller logic here
   Task.findOneAndUpdate(
     { _id: req.body.id },

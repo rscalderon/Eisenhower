@@ -3,10 +3,9 @@ import React, { useState, useEffect } from 'react';
 // TaskRow is the component that contains the individual task as well as its corresponding submit and update buttons
 const TaskRow = (props) => {
   // init constant variables task as passed-in task prop from MainContainer get request to database, taskState as state (task) and taskSetter as setter
-  const task = props.id.task;
+  const { task } = props.id;
   const [taskState, taskSetter] = useState(task);
-  // throw new Error('err');
-  // The taskDelete function sends a request to the server to delete the current task from the database
+  // Delete current task from DB
   const taskDelete = () => {
     // invoke Fetch API method with DELETE request
     fetch('/tasks', {

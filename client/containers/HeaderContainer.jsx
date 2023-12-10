@@ -1,7 +1,7 @@
 import React from 'react';
 
 // HeaderContainer holds main title, forms for new task entry and submission, and the clear all button
-const HeaderContainer = () => {
+const HeaderContainer = ({ resetCount, setter }) => {
   // init vars task and priority in taskCreator closure. These will be updated as the user enters data into the newTask and Priority fields
   let task, priority;
   // The taskCreator function sends a POST request to the server to add a new task to the database
@@ -19,19 +19,20 @@ const HeaderContainer = () => {
       .catch((err) => console.error('Error at taskCreator in App.jsx:', err));
     return;
   };
-  // clearConfirm alerts the user that they are about to reset the database and requests confirmation
+  // confirm that user wants to delete all tasks before clearing database
   const clearConfirm = () => {
     alert('Warning! Doing this will clear all of your tasks.');
-    // if the user confirms, invoke clearDB
     if (confirm('Are you sure you want to proceed?')) clearDB();
   };
-  // init function clearDB, a function that resets the entire database through a PUT request to our backend
+  // clear all tasks from database
   const clearDB = () => {
     fetch('/tasks', {
       method: 'PUT',
     })
-      .then((response) => response.json())
-      .then((data) => console.log('successfully reset DB:', data))
+      .then(() => {
+        console.log('successfully reset DB');
+        setter(resetCount++);
+      })
       .catch((err) => console.error('Error at taskCreator in App.jsx:', err));
   };
   return (
