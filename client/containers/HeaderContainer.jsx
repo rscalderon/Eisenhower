@@ -17,7 +17,7 @@ const HeaderContainer = () => {
     })
       .then((response) => response.json())
       .then((data) => console.log('successfully posted new Task:', data))
-      .catch((err) => console.log('Error at taskCreator in App.jsx:', err));
+      .catch((err) => console.error('Error at taskCreator in App.jsx:', err));
     return;
   };
   // clearConfirm alerts the user that they are about to reset the database and requests confirmation
@@ -35,7 +35,7 @@ const HeaderContainer = () => {
     })
       .then((response) => response.json())
       .then((data) => console.log('successfully reset DB:', data))
-      .catch((err) => console.log('Error at taskCreator in App.jsx:', err));
+      .catch((err) => console.error('Error at taskCreator in App.jsx:', err));
   };
   return (
     <header id='mainHeader'>
