@@ -21,10 +21,10 @@ router.patch('/', taskController.patchTasks, (req, res) => {
 
 router.put('/', taskController.resetTasks, (req, res) => {
   console.log('sending resetTasks response');
-  return res.status(200).send('');
+  return res.status(200);
 });
 
-router.delete('/', taskController.deleteTasks, (req, res) => {
+router.delete('/', taskController.deleteTask, (req, res) => {
   console.log('sending deleteTasks response');
   return res.status(200);
 });

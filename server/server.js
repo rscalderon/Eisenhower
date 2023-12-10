@@ -9,15 +9,15 @@ const app = express();
 const taskRouter = require('./taskRouter');
 const PORT = 3000;
 
-mongoose
-  .connect(
-    'mongodb+srv://samourcalderon:Lhc7kzLqKHuJ7cv2@cluster0.pmha4cj.mongodb.net/',
-    { useNewUrlParser: true, useUnifiedTopology: true }
-  )
-  .catch((err) => console.error(err));
-mongoose.connection.once('open', () => {
-  console.log('Connected to Database');
-});
+// mongoose
+//   .connect(
+//     'mongodb+srv://samourcalderon:Lhc7kzLqKHuJ7cv2@cluster0.pmha4cj.mongodb.net/',
+//     { useNewUrlParser: true, useUnifiedTopology: true }
+//   )
+//   .catch((err) => console.error(err));
+// mongoose.connection.once('open', () => {
+//   console.log('Connected to Database');
+// });
 
 // parse incoming JSON
 app.use(express.json());

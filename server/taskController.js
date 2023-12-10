@@ -11,7 +11,6 @@ taskController.getTasks = (req, res, next) => {
       res.locals.tasks = tasks;
       return next();
     })
-    // if there is an error, invoke global error handler in server.js
     .catch((err) => {
       return next({
         log: `Error at taskController.getTasks: ${err}`,
@@ -22,9 +21,8 @@ taskController.getTasks = (req, res, next) => {
 };
 
 taskController.postTasks = (req, res, next) => {
-  // Extract task and priority
+  // create new Task with data from frontend request
   const { task, priority } = req.body;
-  // init new task instance
   const newTask = new Task({ task, priority });
   newTask
     .save()
@@ -42,19 +40,17 @@ taskController.postTasks = (req, res, next) => {
 };
 
 taskController.patchTasks = (req, res, next) => {
-  // insert controller logic here
   Task.findOneAndUpdate(
     { _id: req.body.id },
     { task: req.body.task },
     { new: true }
   )
-    .then((t) => {
-      console.log(t);
-      res.locals.output = t.task;
+    .then((newTask) => {
+      res.locals.newTask = newTask.task;
       return next();
     })
     .catch((err) => {
-      console.log('Error in taskController.patchTasks:', err);
+      console.error('Error in taskController.patchTasks:', err);
       return next(err);
     });
 };
@@ -72,11 +68,10 @@ taskController.resetTasks = (req, res, next) => {
     });
 };
 
-taskController.deleteTasks = (req, res, next) => {
+taskController.deleteTask = (req, res, next) => {
   Task.findOneAndDelete({ _id: req.body.id })
-    .then((t) => {
-      console.log(t);
-      res.locals.output = t.task;
+    .then((deletedTask) => {
+      res.locals.output = deletedTask.task;
       return next();
     })
     .catch((err) => {
