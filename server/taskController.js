@@ -3,21 +3,20 @@ const Task = require('./db/TaskModel.js');
 const taskController = {};
 
 taskController.getTasks = (req, res, next) => {
-  // // Extract priority from request body
+  // Extract priority from request body
   const { priority } = req.query;
   // pull all tasks that match priority
-  Task.find({ priority: priority })
+  Task.find({ priority })
     .then((t) => {
       res.locals.output = t;
-      // console.log('database response to Task.find is:', t);
       return next();
     })
+    // if there is an error, invoke global error handler in server.js
     .catch((err) => {
       console.log('Error in taskController.getTasks', err);
       return next(err);
     });
   // newTask.save().then();
-  // if there is an error, invoke global error handler in server.js
 };
 
 taskController.postTasks = (req, res, next) => {
@@ -83,10 +82,3 @@ taskController.deleteTasks = (req, res, next) => {
 };
 
 module.exports = taskController;
-
-// const db = require('./db/tasks');
-// const writeLocation = `${__dirname}/db/tasks'`;
-
-// const { Long } = require('mongodb');
-// const mongoose = require('mongoose');
-// const fs = require('fs');
