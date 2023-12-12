@@ -2,6 +2,9 @@
 const path = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const app = express();
 
@@ -10,10 +13,7 @@ const taskRouter = require('./taskRouter');
 const PORT = 3000;
 
 mongoose
-  .connect(
-    'mongodb+srv://samourcalderon:<password>@cluster0.pmha4cj.mongodb.net/?retryWrites=true&w=majority',
-    { useNewUrlParser: true, useUnifiedTopology: true }
-  )
+  .connect(process.env.URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connected to Database'))
   .catch((err) => console.error('Error connecting to MongoDB database:', err));
 
