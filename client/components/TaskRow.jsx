@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 // TaskRow is the component that contains the individual task as well as its corresponding submit and update buttons
 const TaskRow = (props) => {
@@ -20,6 +20,7 @@ const TaskRow = (props) => {
           'successfully deleted task from database in TaskRow component:',
           data
         );
+
         return taskSetter(null);
       })
       // if error is caught, log the error

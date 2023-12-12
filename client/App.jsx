@@ -7,7 +7,7 @@ const App = () => {
   return (
     <div>
       <HeaderContainer setter={updateResetCount} resetCount={resetCount} />
-      <MainContainer resetCount={resetCount} />
+      <MainContainer setter={updateResetCount} resetCount={resetCount} />
     </div>
   );
 };

@@ -39,16 +39,14 @@ const MainContainer = ({ resetCount }) => {
             setter={updateQuadrants}
           ></Quadrant>
         );
-        // re-render MainContainer component with all quadrants
-        updateQuadrants(quadrantsArr);
       }
+      // re-render MainContainer component with all quadrants
+      updateQuadrants(quadrantsArr);
     };
     fetchTasks();
   }, [resetCount]);
   return (
-    <main id='AppContainer'>
-      {allQuadrants ? allQuadrants : 'Loading...'}
-    </main>
+    <main id='AppContainer'>{allQuadrants ? allQuadrants : 'Loading...'}</main>
   );
 };
 
