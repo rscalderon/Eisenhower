@@ -1,5 +1,5 @@
 # Eisenhower
-## To-do app with Eisenhower Matrix functionality
+##### To-do app with Eisenhower Matrix functionality
 
 Are you a busy professional, manager, or knowledge worker?
 
